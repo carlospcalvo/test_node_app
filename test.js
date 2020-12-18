@@ -1,14 +1,39 @@
-const XMLHttpRequest = require('xhr2');
-const xhr = new XMLHttpRequest();
+const http = require('http');
+const net = require('net');
+const URL  = require('url');
+const port = 50000;
+const host = "hanab1";
 const user = "manager";
 const pass = "s0p0rt3";
 const schema = "CORESA_01_12_2020"; //"KING_SA";
+/*
 const loginJson = {
     "CompanyDB": schema,
     "UserName": user,
     "Password": pass
 }
+*/
+const hana = require('@sap/hana-client');
+var connOpts =
+{
+    host: host,
+    port: port,
+    user: user,
+    password: pass,
+    schema: schema
+}
 
+let conn = hanaClient.createClient(connOpts);
+if(conn.connect()){
+    console.log("Conexión realizada con éxito a la base " + schema);
+} else {
+    console.log("Error en la conexión...");
+}
+
+conn.disconnect();
+
+
+/*
 SAPB1Login();
 
 
@@ -33,3 +58,5 @@ function SAPB1Login(){
     //todo lo del send va en el body de la request
     xhr.send(JSON.stringify(loginJson));
 }
+
+*/
