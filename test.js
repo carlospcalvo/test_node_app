@@ -1,3 +1,4 @@
+const XMLHttpRequest = require('xhr2');
 const xhr = new XMLHttpRequest();
 const user = "manager";
 const pass = "s0p0rt3";
