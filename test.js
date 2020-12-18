@@ -23,7 +23,8 @@ var connOpts =
     schema: schema
 }
 
-let conn = hanaClient.createClient(connOpts);
+let client = hana.createConnection();
+let conn = client.createClient(connOpts);
 if(conn.connect()){
     console.log("Conexión realizada con éxito a la base " + schema);
 } else {
