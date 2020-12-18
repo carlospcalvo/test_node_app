@@ -24,14 +24,16 @@ var connOpts =
 }
 
 let client = hana.createConnection();
-let conn = client.createClient(connOpts);
-if(conn.connect()){
+let conn = client.connect(connOpts);
+if(conn){
     console.log("Conexión realizada con éxito a la base " + schema);
 } else {
     console.log("Error en la conexión...");
 }
 
-conn.disconnect();
+if(conn.disconnect()){
+    console.log('Disconnected');
+}
 
 
 /*
