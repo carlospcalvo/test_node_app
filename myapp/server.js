@@ -1,11 +1,11 @@
 const express = require('express');
-const http = require('http');
+const http = require('https');
 const app = express();
-let data = {
+let data = JSON.stringify({
   CompanyDB: "CORESA_01_12_2020",
   UserName: "manager",
   Password: "s0p0rt3"
-}
+}); 
 
 app.get('/login', function (req, res) {
   
@@ -24,6 +24,7 @@ app.get('/login', function (req, res) {
     response.setEncoding('utf8');
     response.on('data', function(chunk){
       res.send("body: " + JSON.stringify(chunk));
+      process.stdout.write(d);
     });
     response.on('end', function() {
       res.send('ok');
@@ -31,9 +32,15 @@ app.get('/login', function (req, res) {
 
   });
 
-  if(httpreq.write(JSON.stringify(data))){
+  if(httpreq.write(data)){
     res.send('Logged in!');
+    //res.send();
   }
+
+  httpreq.on('error', error => {
+    console.error(error)
+  })
+  
 
   httpreq.end(); 
 });
