@@ -23,8 +23,8 @@ app.get('/login', function (req, res) {
   let httpreq = http.request(options, function(response){
     response.setEncoding('utf8');
     response.on('data', function(chunk){
-      res.send("body: " + JSON.stringify(chunk));
-      console.log(chunk);
+      res.json(chunk);
+      //console.log(chunk);
     });
     response.on('end', function() {
       res.send('ok');
@@ -95,7 +95,7 @@ app.get('/clientes', function (req, res) {
     console.log('status: ', resp.statusCode);
 
     resp.on('data', d => {
-      res.send(d);
+      res.json(d);
     });
   });
 
