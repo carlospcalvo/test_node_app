@@ -22,14 +22,13 @@ app.get('/login', function (req, res) {
 
   let httpreq = http.request(options, function(response){
     response.setEncoding('utf8');
-    response.on('data', function (chunk) {
-      console.log("body: " + chunk);
+    response.on('data', function(chunk){
+      console.log("body: " + JSON.stringify(chunk));
     });
-
     response.on('end', function() {
       res.send('ok');
     });
-    
+
   });
 
   if(httpreq.write(data)){
