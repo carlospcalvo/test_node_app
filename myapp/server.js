@@ -68,9 +68,9 @@ app.post('/login', function(req, res) {
         console.error('Error: ' + err.status + '-' + mensaje);
     });
      */
-
-    let schema = data['CompanyDB'];
-    let user = data['UserName'];
+    let dataJSON = JSON.parse(data);
+    let schema = dataJSON['CompanyDB'];
+    let user = dataJSON['UserName'];
 
     res.send(user + '' + schema);
 });
