@@ -34,27 +34,7 @@ app.get('/login', function (req, res) {
 
   if(httpreq.write(data)){
     res.send('Logged in!');
-    
-    let optionsGet = {
-      host: 'hanab1',
-      port: 50000,
-      path: '/b1s/v1/BusinessPartners',
-      method: 'GET'
-    };
-
-    let hhtpget = http.request(optionsGet, resp =>{
-      console.log('status: ', resp.statusCode);
-
-      resp.on('data', d => {
-        res.send(d);
-      });
-    });
-
-    httpget.on('error', err => {
-      console.error(err);
-    });
-
-    httpget.end();
+    res.send('Data: ' + JSON.stringify(data));
   };
 
   httpreq.on('error', error => {
@@ -100,6 +80,31 @@ app.get('/logout', function (req, res) {
 
 app.get('/', function (req, res) {
   res.send('Hello World!');
+});
+
+app.get('/clientes', function (req, res) {
+  
+  let optionsGet = {
+    host: 'hanab1',
+    port: 50000,
+    path: '/b1s/v1/BusinessPartners',
+    method: 'GET'
+  };
+
+  let hhtpget = http.request(optionsGet, resp =>{
+    console.log('status: ', resp.statusCode);
+
+    resp.on('data', d => {
+      res.send(d);
+    });
+  });
+
+  httpget.on('error', err => {
+    console.error(err);
+  });
+
+  httpget.end();
+
 });
 
 const port = process.env.PORT || 3000;
