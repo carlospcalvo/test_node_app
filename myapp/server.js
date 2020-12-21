@@ -25,34 +25,33 @@ app.post('/login', function(req, res) {
             //'Content-Length': Buffer.byteLength(data)
         }
     };
-    /*
-      let httpreq = http.request(options, function(response) {
-          response.setEncoding('utf8');
-          response.on('data', function(chunk) {
-              res.json(chunk);
-              //console.log(chunk);
-          });
-          response.on('end', function() {
-              res.send('ok');
-          });
 
-      });
+    let httpreq = http.request(options, function(response) {
+        response.setEncoding('utf8');
+        response.on('data', function(chunk) {
+            res.json(chunk);
+            //console.log(chunk);
+        });
+        response.on('end', function() {
+            res.send('ok');
+        });
 
-      if (httpreq.write(data)) {
-          res.send('Logged in!');
-      };
+    });
 
-      httpreq.on('error', error => {
-          console.error(error)
-      })
+    if (httpreq.write(data)) {
+        res.send('Logged in!');
+    };
+
+    httpreq.on('error', error => {
+        console.error(error)
+    })
 
 
-      httpreq.end();
-      *************************/
+    httpreq.end();
+    /*************************
     let dataJSON = JSON.parse(data);
     let schema = dataJSON['CompanyDB'];
     let user = dataJSON['UserName'];
-
 
     const config = {
         method: "POST",
@@ -71,6 +70,7 @@ app.post('/login', function(req, res) {
             let mensaje = err.statusText || 'Se produjo un error.';
             console.error('Error: ' + err.status + '-' + mensaje);
         });
+    */
 });
 
 app.get('/logout', function(req, res) {
