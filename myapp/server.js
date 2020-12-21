@@ -50,8 +50,8 @@ app.post('/login', function(req, res) {
 
     httpreq.end();
     **************************/
-    res.send(req.body);
-    /*
+    //res.send(req.body);
+
     const config = {
         method: "POST",
         headers: {
@@ -69,7 +69,7 @@ app.post('/login', function(req, res) {
             let mensaje = err.statusText || 'Se produjo un error.';
             console.error('Error: ' + err.status + '-' + mensaje);
         });
-        */
+
 });
 
 app.get('/logout', function(req, res) {
