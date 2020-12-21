@@ -23,6 +23,36 @@ app.get('/login', function (req, res) {
   let httpreq = http.request(options, function(response){
     response.setEncoding('utf8');
     response.on('data', function(chunk){
+      res.send("body: " + JSON.stringify(chunk));
+    });
+    response.on('end', function() {
+      res.send('ok');
+    });
+
+  });
+
+  if(httpreq.write(JSON.stringify(data))){
+    res.send('Logged in!');
+  }
+
+  httpreq.end(); 
+});
+
+app.get('/logout', function (req, res) {
+  let options = {
+    host: 'hanab1',
+    port: 50000,
+    path: '/b1s/v1/Logout',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      //'Content-Length': Buffer.byteLength(data)
+    }
+  };
+
+  let httpreq = http.request(options, function(response){
+    response.setEncoding('utf8');
+    response.on('data', function(chunk){
       console.log("body: " + JSON.stringify(chunk));
     });
     response.on('end', function() {
@@ -35,15 +65,7 @@ app.get('/login', function (req, res) {
     res.send('Logged in!');
   }
 
- 
-
-  
-  
   httpreq.end(); 
-});
-
-app.get('/logout', function (req, res) {
-  
   
   res.send('Logged out!');
 });
