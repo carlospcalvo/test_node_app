@@ -91,7 +91,7 @@ app.get('/clientes', function (req, res) {
     method: 'GET'
   };
 
-  let hhtpget = http.request(optionsGet, resp =>{
+  let httpget = http.request(optionsGet, resp =>{
     console.log('status: ', resp.statusCode);
 
     resp.on('data', d => {
