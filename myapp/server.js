@@ -34,8 +34,28 @@ app.get('/login', function (req, res) {
 
   if(httpreq.write(data)){
     res.send('Logged in!');
-    console.log(data);
-  }
+    
+    let optionsGet = {
+      host: 'hanab1',
+      port: 50000,
+      path: '/b1s/v1/BusinessPartners',
+      method: 'GET'
+    };
+
+    let hhtpget = http.request(optionsGet, resp =>{
+      console.log('status: ', resp.statusCode);
+
+      resp.on('data', d => {
+        process.stdout.write(d);
+      });
+    });
+
+    httpget.on('error', err => {
+      console.error(err);
+    });
+
+    httpget.end();
+  };
 
   httpreq.on('error', error => {
     console.error(error)
