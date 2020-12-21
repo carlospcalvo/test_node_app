@@ -2,7 +2,7 @@ const express = require('express');
 const http = require('https');
 const axios = require('axios');
 const bodyParser = require('body-parser');
-const { request } = require('express');
+const XMLHttpRequest = require('xhr');
 const app = express();
 let datos = JSON.stringify({
     "CompanyDB": "CORESA_01_12_2020",
@@ -49,7 +49,7 @@ app.post('/login', function(req, res) {
 
 
     httpreq.end();
-    **************************/
+    **************************
     //res.send(req.body);
 
     const config = {
@@ -57,9 +57,9 @@ app.post('/login', function(req, res) {
         headers: {
             "Content-type": "application/json;charset=utf-8"
         },
-        data: req.body
+        body: req.body
     };
-
+    
     axios.post('https://hanab1:50000/b1s/v1/Login', config)
         .then(res => {
             console.log(JSON.stringify(res.data));
@@ -69,7 +69,32 @@ app.post('/login', function(req, res) {
             let mensaje = err.statusText || 'Se produjo un error.';
             console.error('Error: ' + err.status + '-' + mensaje);
         });
+        */
+    /*
+      let XHRConfig = {
+        url: 'https://hanab1:50000/b1s/v1/Login',
+        method: 'POST',
+        timeout: 15000,
+        body: datos,
+        json: true
+      }*/
 
+    let xhr = new XMLHttpRequest();
+
+    xhr.addEventListener('readystatechange', () => {
+        if (xhr.readyState == 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                console.log(JSON.parse(xhr.responseText));
+            } else {
+                let mensaje = xhr.statusText || 'Se produjo un error.';
+                console.error('Error: ' + xhr.status + '-' + mensaje);
+            }
+        }
+    })
+
+    xhr.open('POST', 'https://hanab1:50000/b1s/v1/Login');
+    xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
+    xhr.send(datos);
 });
 
 app.get('/logout', function(req, res) {
