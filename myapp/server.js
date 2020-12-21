@@ -31,7 +31,7 @@ app.get('/login', function (req, res) {
 
   });
 
-  if(httpreq.write(data)){
+  if(httpreq.write(JSON.stringify(data))){
     res.send('Logged in!');
   }
 
