@@ -1,5 +1,6 @@
 const express = require('express');
-const http = require('https');
+//const http = require('https');
+const axios = require('axios');
 const app = express();
 let data = JSON.stringify({
   CompanyDB: "CORESA_01_12_2020",
@@ -90,7 +91,7 @@ app.get('/clientes', function (req, res) {
     path: "/b1s/v1/BusinessPartners('C00818')",
     method: 'GET'
   };
-
+  /*
   let httpget = http.request(optionsGet, resp =>{
     console.log('status: ', resp.statusCode);
 
@@ -104,7 +105,17 @@ app.get('/clientes', function (req, res) {
   });
 
   httpget.end();
+  */
 
+ axios.get(optionsGet['host'] + ':' + optionsGet['port'] + optionsGet['path'])
+ .then(response => {
+     console.log(response.data.status);
+     // console.log(response.data);
+     res.send(response.data.status);
+ })
+ .catch(error => {
+     console.log(error);
+ });
 });
 
 const port = process.env.PORT || 3000;
