@@ -3,7 +3,7 @@ const http = require('https');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const app = express();
-let data = JSON.stringify({
+let datos = JSON.stringify({
     CompanyDB: "CORESA_01_12_2020",
     UserName: "manager",
     Password: "s0p0rt3"
@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 
 app.post('/login', function(req, res) {
-
+    /*
     let options = {
         host: 'hanab1',
         port: 50000,
@@ -22,10 +22,10 @@ app.post('/login', function(req, res) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            //'Content-Length': Buffer.byteLength(data)
+            //'Content-Length': Buffer.byteLength(datos)
         }
     };
-
+    /*
     let httpreq = http.request(options, function(response) {
         response.setEncoding('utf8');
         response.on('data', function(chunk) {
@@ -38,7 +38,7 @@ app.post('/login', function(req, res) {
 
     });
 
-    if (httpreq.write(data)) {
+    if(httpreq.write(datos)) {
         res.send('Logged in! ' + res.data);
     };
 
@@ -48,8 +48,8 @@ app.post('/login', function(req, res) {
 
 
     httpreq.end();
-    /*************************
-    let dataJSON = JSON.parse(data);
+    **************************/
+    let dataJSON = JSON.parse(datos);
     let schema = dataJSON['CompanyDB'];
     let user = dataJSON['UserName'];
 
@@ -58,10 +58,10 @@ app.post('/login', function(req, res) {
         headers: {
             "Content-type": "application/json;charset=utf-8"
         },
-        data: data
+        data: datos
     };
 
-    axios('https://' + options['host'] + ':' + options['port'] + options['path'], config)
+    axios('https://hanab1:50000/b1s/v1/Login', config)
         .then(res => {
             console.log(JSON.stringify(res.data));
             res.send("Logged in!");
@@ -70,7 +70,6 @@ app.post('/login', function(req, res) {
             let mensaje = err.statusText || 'Se produjo un error.';
             console.error('Error: ' + err.status + '-' + mensaje);
         });
-    */
 });
 
 app.get('/logout', function(req, res) {
@@ -97,7 +96,7 @@ app.get('/logout', function(req, res) {
 
     });
 
-    if (httpreq.write(data)) {
+    if (httpreq.write(datos)) {
         res.send('Logged out!' + res.statusCode);
     }
 
