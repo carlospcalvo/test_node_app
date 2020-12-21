@@ -39,7 +39,7 @@ app.post('/login', function(req, res) {
     });
 
     if (httpreq.write(data)) {
-        res.send('Logged in!');
+        res.send('Logged in! ' + res.data);
     };
 
     httpreq.on('error', error => {
