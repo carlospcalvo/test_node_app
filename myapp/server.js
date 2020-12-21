@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('https');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const { request } = require('express');
 const app = express();
 let datos = JSON.stringify({
     "CompanyDB": "CORESA_01_12_2020",
@@ -49,19 +50,17 @@ app.post('/login', function(req, res) {
 
     httpreq.end();
     **************************/
-    let dataJSON = JSON.parse(datos);
-    let schema = dataJSON['CompanyDB'];
-    let user = dataJSON['UserName'];
-
+    res.send(req.body);
+    /*
     const config = {
         method: "POST",
         headers: {
             "Content-type": "application/json;charset=utf-8"
         },
-        data: datos
+        data: req.body
     };
 
-    axios('https://hanab1:50000/b1s/v1/Login', config)
+    axios.post('https://hanab1:50000/b1s/v1/Login', config)
         .then(res => {
             console.log(JSON.stringify(res.data));
             res.send("Logged in!");
@@ -70,6 +69,7 @@ app.post('/login', function(req, res) {
             let mensaje = err.statusText || 'Se produjo un error.';
             console.error('Error: ' + err.status + '-' + mensaje);
         });
+        */
 });
 
 app.get('/logout', function(req, res) {
