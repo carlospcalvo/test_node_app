@@ -7,9 +7,6 @@ let data = {
   Password: "s0p0rt3"
 }
 
-
-
-
 app.get('/login', function (req, res) {
   
   let options = {
@@ -28,15 +25,20 @@ app.get('/login', function (req, res) {
     response.on('data', function (chunk) {
       console.log("body: " + chunk);
     });
-  });
 
-  response.on('end', function() {
-    res.send('ok');
+    response.on('end', function() {
+      res.send('ok');
+    });
+    
   });
 
   if(httpreq.write(data)){
     res.send('Logged in!');
   }
+
+ 
+
+  
   
   httpreq.end(); 
 });
