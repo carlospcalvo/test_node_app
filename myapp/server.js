@@ -48,7 +48,11 @@ app.post('/login', function(req, res) {
 
 
       httpreq.end();
-      *************************
+      *************************/
+    let dataJSON = JSON.parse(data);
+    let schema = dataJSON['CompanyDB'];
+    let user = dataJSON['UserName'];
+
 
     const config = {
         method: "POST",
@@ -58,21 +62,15 @@ app.post('/login', function(req, res) {
         data: data
     };
 
-    axios('', config)
-    .then(res => {
-        console.log(res.data);
-        
-    })
-    .catch(err => {
-        let mensaje = err.statusText || 'Se produjo un error.';
-        console.error('Error: ' + err.status + '-' + mensaje);
-    });
-     */
-    let dataJSON = JSON.parse(data);
-    let schema = dataJSON['CompanyDB'];
-    let user = dataJSON['UserName'];
-
-    res.send(user + '' + schema);
+    axios('https://' + options['host'] + ':' + options['port'] + options['path'], config)
+        .then(res => {
+            console.log(JSON.stringify(res.data));
+            res.send("Logged in!");
+        })
+        .catch(err => {
+            let mensaje = err.statusText || 'Se produjo un error.';
+            console.error('Error: ' + err.status + '-' + mensaje);
+        });
 });
 
 app.get('/logout', function(req, res) {
