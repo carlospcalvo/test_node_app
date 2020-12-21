@@ -33,8 +33,7 @@ app.get('/login', function (req, res) {
   });
 
   if(httpreq.write(data)){
-    res.send('Logged in!');
-    res.send('Data: ' + JSON.stringify(data));
+    res.send('Logged in!' + res.statusCode);
   };
 
   httpreq.on('error', error => {
@@ -69,8 +68,8 @@ app.get('/logout', function (req, res) {
 
   });
 
-  if(httpreq.write(JSON.stringify(data))){
-    res.send('Logged in!');
+  if(httpreq.write(data)){
+    res.send('Logged out!' + res.statusCode);
   }
 
   httpreq.end(); 
