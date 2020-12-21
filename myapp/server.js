@@ -4,9 +4,9 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 const app = express();
 let datos = JSON.stringify({
-    CompanyDB: "CORESA_01_12_2020",
-    UserName: "manager",
-    Password: "s0p0rt3"
+    "CompanyDB": "CORESA_01_12_2020",
+    "UserName": "manager",
+    "Password": "s0p0rt3"
 });
 
 app.use(bodyParser.json()); // support json encoded bodies
