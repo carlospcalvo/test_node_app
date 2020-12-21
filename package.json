@@ -1,0 +1,23 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "my first node app ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carlospcalvo/test_node_app.git"
+  },
+  "author": "Carlos Calvo Nazabal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carlospcalvo/test_node_app/issues"
+  },
+  "homepage": "https://github.com/carlospcalvo/test_node_app#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
