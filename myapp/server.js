@@ -60,6 +60,7 @@ app.get('/logout', function (req, res) {
   let httpreq = http.request(options, function(response){
     response.setEncoding('utf8');
     response.on('data', function(chunk){
+      console.log('status: ', response.statusCode);
       console.log("body: " + JSON.stringify(chunk));
     });
     response.on('end', function() {
@@ -87,7 +88,7 @@ app.get('/clientes', function (req, res) {
   let optionsGet = {
     host: 'hanab1',
     port: 50000,
-    path: '/b1s/v1/BusinessPartners',
+    path: "/b1s/v1/BusinessPartners('C00818')",
     method: 'GET'
   };
 
