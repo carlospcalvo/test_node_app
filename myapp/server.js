@@ -46,7 +46,7 @@ app.get('/login', function (req, res) {
       console.log('status: ', resp.statusCode);
 
       resp.on('data', d => {
-        process.stdout.write(d);
+        res.send(d);
       });
     });
 
