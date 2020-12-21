@@ -24,7 +24,7 @@ app.get('/login', function (req, res) {
     response.setEncoding('utf8');
     response.on('data', function(chunk){
       res.send("body: " + JSON.stringify(chunk));
-      process.stdout.write(d);
+      process.stdout.write(JSON.stringify(chunk));
     });
     response.on('end', function() {
       res.send('ok');
@@ -34,7 +34,7 @@ app.get('/login', function (req, res) {
 
   if(httpreq.write(data)){
     res.send('Logged in!');
-    //res.send();
+    console.log(data);
   }
 
   httpreq.on('error', error => {
