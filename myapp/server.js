@@ -118,7 +118,7 @@ app.post('/login', function(req, res) {
     */
 
     //Connect();
-
+    /*
     var config = {
         method: 'post',
         url: 'https://hanab1:50000/b1s/v1/Login',
@@ -136,7 +136,8 @@ app.post('/login', function(req, res) {
         .catch(function(error) {
             console.log(error);
         });
-
+    */
+    console.log('login');
 });
 
 app.get('/logout', function(req, res) {
