@@ -137,8 +137,8 @@ app.post('/login', function(req, res) {
             console.log(error);
         });
     */
-    res.send(res.data);
-    console.log(res.data);
+    res.send(req.data);
+    console.log(req.data);
 });
 
 app.get('/logout', function(req, res) {
