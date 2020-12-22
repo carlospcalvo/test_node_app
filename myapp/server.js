@@ -129,7 +129,7 @@ app.post('/login', function(req, res) {
         data: datos,
         timeout: 5000
     };
-    res.send(req.getHeader());
+    res.send(req.rawHeaders);
     axios(config)
         .then(function(response) {
             res.send(JSON.stringify(response.data));
