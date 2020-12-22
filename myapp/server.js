@@ -181,38 +181,25 @@ app.get('/', function(req, res) {
 });
 
 app.get('/clientes', function(req, res) {
-    let optionsGet = {
-        host: 'hanab1',
-        port: 50000,
-        path: "/b1s/v1/BusinessPartners('C00818')",
-        method: 'GET'
+    var config = {
+        method: 'get',
+        url: "/b1s/v1/BusinessPartners('C00818')",
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
+        },
+        //data: datos,
+        timeout: 5000
     };
-    /*
-    let httpget = http.request(optionsGet, resp =>{
-      console.log('status: ', resp.statusCode);
 
-      resp.on('data', d => {
-        res.json(d);
-      });
-    });
-
-    httpget.on('error', err => {
-      console.error(err);
-    });
-
-    httpget.end();
-    */
-
-    axios.get(optionsGet['host'] + ':' + optionsGet['port'] + optionsGet['path'])
-        .then(response => {
-            console.log(response.data.status);
-            // console.log(response.data);
-            res.send(response.data.status);
+    axios(config)
+        .then(function(response) {
+            console.log(JSON.stringify(response.data));
         })
-        .catch(error => {
-            let mensaje = err.statusText || 'Se produjo un error.';
-            console.error('Error: ' + err.status + '-' + mensaje);
+        .catch(function(error) {
+            console.log(error);
         });
+
 });
 
 const port = process.env.PORT || 3000;
