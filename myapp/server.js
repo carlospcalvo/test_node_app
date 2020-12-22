@@ -133,12 +133,13 @@ app.post('/login', function(req, res) {
     axios(config)
         .then(function(response) {
             console.log(JSON.stringify(response.data));
+            res.send(JSON.stringify({ "Code": response.statusCode, "Message": response.statusMessage }));
         })
         .catch(function(error) {
             console.log(error);
         });
 
-    res.send(JSON.stringify({ "Code": res.statusCode, "Message": res.statusMessage }));
+
     //console.log(JSON.stringify(req.body));
 });
 
