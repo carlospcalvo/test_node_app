@@ -109,19 +109,7 @@ app.post('/login', function(req, res) {
     })
     */
 
-    let request = require('request');
-    let options = {
-        'method': 'POST',
-        'url': 'https://hanab1:50000/b1s/v1/Login',
-        'headers': {},
-        body: datos
-
-    };
-    request(options, function(error, response) {
-        if (error) throw new Error(error);
-        console.log(response.body);
-        response.send(response.body);
-    });
+    Connect();
 });
 
 app.get('/logout', function(req, res) {
@@ -202,3 +190,43 @@ const port = process.env.PORT || 3000;
 app.listen(port, function() {
     console.log('myapp listening on port ' + port);
 });
+
+
+
+
+
+
+//Connect to Service Layer
+let Connect = function() {
+    return new Promise(function(resolve, reject) {
+        const options = {
+            method: "POST",
+            baseURL: "hanab1",
+            port: 50000,
+            url: '/b1s/v1/Login',
+            data: {
+                UserName: 'manager',
+                Password: 's0p0rt3',
+                CompanyDB: 'CORESA_01_12_2020'
+            }
+        }
+
+        axios.request(options).then((response) => {
+                console.log(`SL Response: is ${response.status} - ${response.statusText}`)
+                if (response.statusCode < 200 || response.statusCode >= 300) {
+                    return reject(
+                        new Error(`${response.statusCode}: ${response.req.getHeader("host")} ${response.req.path}`)
+                    );
+                } else {
+                    resolve({
+                        cookie: response.headers['set-cookie'],
+                        SessionId: response.data.SessionId
+                    })
+                }
+            })
+            .catch((err) => {
+                console.error("Error calling B1 -" + err)
+                reject(new Error(err));
+            })
+    })
+}
