@@ -115,7 +115,6 @@ app.post('/login', function(req, res) {
 
     var config = {
         method: 'post',
-        secure: false,
         url: 'https://172.0.1.211:50000/b1s/v1/Login',
         headers: {},
         data: datos
