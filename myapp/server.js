@@ -3,7 +3,7 @@ const http = require('https');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 const XHR = require('xhr');
-const { default: Xhr } = require('xhr');
+const cors = require('cors');
 const app = express();
 let datos = JSON.stringify({
     "CompanyDB": "CORESA_01_12_2020",
@@ -13,7 +13,7 @@ let datos = JSON.stringify({
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
+app.use(cors());
 //supuestamente desactiva el certificado ssl
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
