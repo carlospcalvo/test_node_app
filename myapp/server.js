@@ -60,7 +60,7 @@ app.post('/login', function(req, res) {
         body: datos
     };
 
-    axios.post('https://172.0.1.211:50000/b1s/v1/Login', config)
+    axios.post('https://hanab1:50000/b1s/v1/Login', config)
         .then(res => {
             console.log(JSON.stringify(res.data));
             res.send("Logged in!");
