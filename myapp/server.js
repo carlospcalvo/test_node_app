@@ -121,8 +121,11 @@ app.post('/login', function(req, res) {
 
     var config = {
         method: 'post',
-        url: '172.0.1.211:50000/b1s/v1/Login',
-        headers: {},
+        url: 'https://hanab1:50000/b1s/v1/Login',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
+        },
         data: datos
     };
 
