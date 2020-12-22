@@ -1,6 +1,6 @@
 const express = require('express');
 const http = require('https');
-const axios = require('axios');
+const axios = require('axios').default;
 const bodyParser = require('body-parser');
 const XHR = require('xhr');
 const cors = require('cors');
@@ -178,7 +178,21 @@ app.get('/logout', function(req, res) {
 
 
 app.get('/', function(req, res) {
-    res.send('Hello World!');
+    //    res.send('Hello World!');
+    let options = {
+        method: 'GET',
+        url: 'https://restcountries-v1.p.rapidapi.com/all',
+        headers: {
+            'x-rapidapi-key': '4578739f95mshef09d2dc0a2cf84p10747cjsn85b8e9b42f6c',
+            'x-rapidapi-host': 'restcountries-v1.p.rapidapi.com'
+        }
+    };
+
+    axios.request(options).then(function(response) {
+        res.send(response.data);
+    }).catch(function(error) {
+        res.send(error);
+    });
 });
 
 app.get('/clientes', function(req, res) {
