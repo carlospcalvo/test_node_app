@@ -121,7 +121,7 @@ app.post('/login', function(req, res) {
 
     var config = {
         method: 'post',
-        url: 'https://172.0.1.211:50000/b1s/v1/Login',
+        url: '172.0.1.211:50000/b1s/v1/Login',
         headers: {},
         data: datos
     };
@@ -197,7 +197,7 @@ app.get('/clientes', function(req, res) {
     httpget.end();
     */
 
-    axios.get('https://' + optionsGet['host'] + ':' + optionsGet['port'] + optionsGet['path'])
+    axios.get(optionsGet['host'] + ':' + optionsGet['port'] + optionsGet['path'])
         .then(response => {
             console.log(response.data.status);
             // console.log(response.data);
