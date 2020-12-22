@@ -118,7 +118,7 @@ app.post('/login', function(req, res) {
     */
 
     //Connect();
-    /*
+
     var config = {
         method: 'post',
         url: 'https://hanab1:50000/b1s/v1/Login',
@@ -126,7 +126,8 @@ app.post('/login', function(req, res) {
             'Content-Type': 'application/json',
             'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
         },
-        data: datos
+        data: datos,
+        timeout: 5000
     };
 
     axios(config)
@@ -136,9 +137,9 @@ app.post('/login', function(req, res) {
         .catch(function(error) {
             console.log(error);
         });
-    */
-    res.send(JSON.stringify(req.body));
-    console.log(JSON.stringify(req.body));
+
+    res.send(JSON.stringify({ "Code": res.statusCode, "Message": res.statusMessage }));
+    //console.log(JSON.stringify(req.body));
 });
 
 app.get('/logout', function(req, res) {
