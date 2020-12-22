@@ -51,7 +51,7 @@ app.post('/login', function(req, res) {
     httpreq.end();
     **************************/
     //res.send(req.body);
-
+    /*
     const config = {
         method: "POST",
         headers: {
@@ -108,6 +108,20 @@ app.post('/login', function(req, res) {
         }
     })
     */
+
+    let request = require('request');
+    let options = {
+        'method': 'POST',
+        'url': 'https://hanab1:50000/b1s/v1/Login',
+        'headers': {},
+        body: datos
+
+    };
+    request(options, function(error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+        response.send(response.body);
+    });
 });
 
 app.get('/logout', function(req, res) {
