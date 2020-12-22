@@ -27,7 +27,7 @@ app.post('/login', function(req, res) {
             //'Content-Length': Buffer.byteLength(datos)
         }
     };
-    /*
+    
     let httpreq = http.request(options, function(response) {
         response.setEncoding('utf8');
         response.on('data', function(chunk) {
@@ -48,7 +48,7 @@ app.post('/login', function(req, res) {
         console.error(error)
     })
 
-    httpreq.end();
+    //httpreq.end();
     **************************/
     //res.send(req.body);
     /*
@@ -109,7 +109,23 @@ app.post('/login', function(req, res) {
     })
     */
 
-    Connect();
+    //Connect();
+
+    var config = {
+        method: 'post',
+        url: 'https://172.0.1.211:50000/b1s/v1/Login',
+        headers: {},
+        data: data
+    };
+
+    axios(config)
+        .then(function(response) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
+
 });
 
 app.get('/logout', function(req, res) {
