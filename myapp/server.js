@@ -10,10 +10,16 @@ let datos = JSON.stringify({
     "UserName": "manager",
     "Password": "s0p0rt3"
 });
+const corsOpts = {
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+};
+
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(cors());
+app.use(cors(corsOpts));
 //supuestamente desactiva el certificado ssl
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
