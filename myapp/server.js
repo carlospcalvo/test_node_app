@@ -129,6 +129,8 @@ app.post('/login', function(req, res) {
         data: datos,
         timeout: 5000
     };
+
+    res.header("Access-Control-Allow-Origin", "*");
     res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
