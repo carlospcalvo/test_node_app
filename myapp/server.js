@@ -131,16 +131,7 @@ app.post('/login', function(req, res) {
         timeout: 5000
     };
 
-    var configGet = {
-        method: 'get',
-        url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners",
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
-        },
-        //data: datos,
-        timeout: 5000
-    };
+
 
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Connection", "keep-alive");
@@ -149,11 +140,22 @@ app.post('/login', function(req, res) {
     axios(config)
         .then(function(response) {
             //response.setHeader("connection", "keep-alive");
-            res.send(JSON.stringify({ headers: response.headers['set-cookie'] }) + JSON.stringify(response.data));
+            //res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
             //res.send(response.getHeader('set-cookie'));
             //GET CLIENTE
-            /*
-            response.header("Access-Control-Allow-Origin", "*");
+
+            var configGet = {
+                method: 'get',
+                url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': response.headers['set-cookie']
+                },
+                //data: datos,
+                timeout: 5000
+            };
+
+            //response.header("Access-Control-Allow-Origin", "*");
 
             axios(configGet)
                 .then(function(resp) {
@@ -162,7 +164,7 @@ app.post('/login', function(req, res) {
                 .catch(function(err) {
                     res.send(err);
                 });
-                */
+
         })
         .catch(function(error) {
             res.send(error);
