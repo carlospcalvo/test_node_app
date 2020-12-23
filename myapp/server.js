@@ -26,49 +26,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 app.get('/clientes', function(req, res) {
 
-    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
-    /*
-    let config = {
-        method: 'post',
-        url: 'https://172.0.1.211:50000/b1s/v1/Login',
-        headers: {
-            'Content-Type': 'application/json',
-            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
-        },
-        data: datos,
-        timeout: 5000
-    };
+    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,LicTradNum&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
 
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Connection", "keep-alive");
-    res.header("Content-Type", "application/json");
-    //POST Login
-    axios(config)
-        .then(function(response) {
-            //GET CLIENTES
-            let configGet = {
-                method: 'get',
-                url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode,'ML')&$orderby=CardCode",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Cookie': response.headers['set-cookie']
-                },
-                timeout: 5000
-            };
-
-            axios(configGet)
-                .then(function(resp) {
-                    res.send(JSON.stringify(resp.data));
-                })
-                .catch(function(err) {
-                    res.send(err);
-                });
-
-        })
-        .catch(function(error) {
-            res.send(error);
-        });
-        */
 });
 
 app.get('/', function(req, res) {
