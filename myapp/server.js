@@ -24,101 +24,7 @@ app.use(cors(corsOpts));
 //desactiva el certificado ssl
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-app.post('/login', function(req, res) {
-    /*
-    let options = {
-        host: 'hanab1',
-        port: 50000,
-        path: '/b1s/v1/Login',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            //'Content-Length': Buffer.byteLength(datos)
-        }
-    };
-    
-    let httpreq = http.request(options, function(response) {
-        response.setEncoding('utf8');
-        response.on('data', function(chunk) {
-            res.json(chunk);
-            //console.log(chunk);
-        });
-        response.on('end', function() {
-            res.send('ok');
-        });
-
-    });
-
-    if(httpreq.write(datos)) {
-        res.send('Logged in! ' + res.data);
-    };
-
-    httpreq.on('error', error => {
-        console.error(error)
-    })
-
-    //httpreq.end();
-    **************************/
-    //res.send(req.body);
-    /*
-    const config = {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json;charset=utf-8"
-        },
-        body: datos
-    };
-
-    axios.post('https://hanab1:50000/b1s/v1/Login', config)
-        .then(res => {
-            console.log(JSON.stringify(res.data));
-            res.send("Logged in!");
-        })
-        .catch(err => {
-            let mensaje = err.statusText || 'Se produjo un error.';
-            console.error('Error: ' + err.status + '-' + mensaje);
-        });
-
-    /*
-    
-    let xhr = new XMLHttpRequest();
-
-    xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState == 4) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                console.log(JSON.parse(xhr.responseText));
-            } else {
-                let mensaje = xhr.statusText || 'Se produjo un error.';
-                console.error('Error: ' + xhr.status + '-' + mensaje);
-            }
-        }
-    })
-
-    xhr.open('POST', 'https://hanab1:50000/b1s/v1/Login');
-    xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
-    xhr.send(datos);
-
-    *
-
-    let XHRConfig = {
-        url: 'https://hanab1:50000/b1s/v1/Login',
-        method: 'POST',
-        timeout: 15000,
-        body: datos,
-        json: true
-    }
-
-    Xhr(XHRConfig, function(err, resp, body) {
-        if (resp.statusCode >= 200 && xhr.statusCode < 300) {
-            console.log(JSON.parse(resp.body));
-        } else {
-            let mensaje = resp.statusText || 'Se produjo un error.';
-            console.error('Error: ' + resp.statusCode + '-' + mensaje);
-        }
-    })
-    */
-
-    //Connect();
+app.get('/clientes', function(req, res) {
 
     var config = {
         method: 'post',
@@ -131,22 +37,19 @@ app.post('/login', function(req, res) {
         timeout: 5000
     };
 
-
-
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Connection", "keep-alive");
     res.header("Content-Type", "application/json");
-    //res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
             //response.setHeader("connection", "keep-alive");
             //res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
             //res.send(response.getHeader('set-cookie'));
-            //GET CLIENTE
 
-            var configGet = {
+            //GET CLIENTES
+            let configGet = {
                 method: 'get',
-                url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode, 'ML')&$orderby=CardCode",
+                url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode,'ML')&$orderby=CardCode",
                 headers: {
                     'Content-Type': 'application/json',
                     'Cookie': response.headers['set-cookie']
@@ -154,8 +57,6 @@ app.post('/login', function(req, res) {
                 //data: datos,
                 timeout: 5000
             };
-
-            //response.header("Access-Control-Allow-Origin", "*");
 
             axios(configGet)
                 .then(function(resp) {
@@ -170,8 +71,6 @@ app.post('/login', function(req, res) {
             res.send(error);
         });
 
-
-    //console.log(JSON.stringify(req.body));
 });
 
 app.get('/logout', function(req, res) {
@@ -225,7 +124,7 @@ app.get('/', function(req, res) {
         res.send(error);
     });
 });
-
+/*
 app.get('/clientes', function(req, res) {
     var config = {
         method: 'get',
@@ -249,7 +148,7 @@ app.get('/clientes', function(req, res) {
         });
 
 });
-
+*/
 
 
 app.listen(port, function() {
