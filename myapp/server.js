@@ -31,9 +31,18 @@ app.get('/clients', function(req, res) {
 });
 
 app.get('/orders', function(req, res) {
+    let select = "$select=";
+    let values = ["DocNum", "DocDate", "CreationDate", "CardCode", "CardName", "DocTotal", "DocCurrency", "DocumentLines"];
 
-    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/Orders?$filter=Cancelled eq 'tNO'&$top=5"); //$filter=contains(Cancelled,'NO')&$top=5
+    for (i = 0; i < values.length; i++) {
+        if (i != values.length - 1) {
+            select += element + ',';
+        } else {
+            select += element;
+        }
+    }
 
+    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/Orders?" + select + "$filter=Cancelled eq 'tNO'&$top=5");
 });
 
 app.get('/', function(req, res) {
