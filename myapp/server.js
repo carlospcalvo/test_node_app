@@ -49,7 +49,7 @@ app.post('/login', function(req, res) {
     axios(config)
         .then(function(response) {
             cookie = res.getHeader('Cookie');
-            res.send(JSON.stringify(response.data));
+            //res.send(JSON.stringify(response.data));
             res.send('Cookie: ' + cookie);
         })
         .catch(function(error) {
