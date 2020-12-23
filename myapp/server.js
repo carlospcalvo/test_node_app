@@ -16,7 +16,7 @@ const corsOpts = {
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
-const cookie;
+let cookie;
 
 
 app.use(bodyParser.json()); // support json encoded bodies
@@ -24,6 +24,12 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors(corsOpts));
 //desactiva el certificado ssl
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+app.listen(port, function() {
+    console.log('myapp listening on port ' + port);
+});
+
+
 
 app.post('/login', function(req, res) {
     /*
@@ -226,9 +232,6 @@ app.get('/clientes', function(req, res) {
 
 
 
-app.listen(port, function() {
-    console.log('myapp listening on port ' + port);
-});
 
 
 
