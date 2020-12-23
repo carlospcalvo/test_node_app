@@ -6,8 +6,10 @@ const bodyParser = require('body-parser');
 const XHR = require('xhr');
 const cors = require('cors');
 const app = express();
+
 let datos = JSON.stringify({
-    "CompanyDB": "KING_SA",
+    "CompanyDB": "CORESA_01_12_2020",
+    //"CompanyDB": "KING_SA",
     "UserName": "manager",
     "Password": "s0p0rt3"
 });
@@ -17,17 +19,13 @@ const corsOpts = {
     allowedHeaders: ['Content-Type'],
 };
 
-
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-app.use(cors(corsOpts));
-//desactiva el certificado ssl
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+app.use(cors(corsOpts)); // enables CORS (I guess)
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // desactiva el certificado ssl
 
 app.get('/clients', function(req, res) {
-
     ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,FederalTaxID&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
-
 });
 
 app.get('/orders', function(req, res) {
@@ -64,6 +62,23 @@ app.get('/', function(req, res) {
         res.send(error);
     });
     */
+});
+
+app.post('/orders', function(req, res) {
+
+    let info = {
+        "CardCode": "C00637",
+        "DocDueDate": "2020-12-31",
+        "DocumentLines": [{
+            "ItemCode": "BT-60-14NW",
+            "Quantity": "10",
+            //"TaxCode": "T1",
+            //"UnitPrice": "30"
+        }]
+    }
+
+    ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", JSON.stringify(info));
+
 });
 
 app.post('/login', function(req, res) {
