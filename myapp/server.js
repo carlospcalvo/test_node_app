@@ -26,7 +26,9 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 app.get('/clientes', function(req, res) {
 
-    var config = {
+    ConnectServiceLayer('GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
+    /*
+    let config = {
         method: 'post',
         url: 'https://172.0.1.211:50000/b1s/v1/Login',
         headers: {
@@ -66,11 +68,12 @@ app.get('/clientes', function(req, res) {
         .catch(function(error) {
             res.send(error);
         });
-
+        */
 });
 
 app.get('/', function(req, res) {
-    res.send(JSON.stringify({ response: "This are not the droids you're looking for." }));
+    res.header("Content-Type", "application/json");
+    res.send(JSON.stringify({ "Obi-Wan Kenobi": "This are not the droids you're looking for." }));
     /*
     let options = {
         method: 'GET',
@@ -90,7 +93,7 @@ app.get('/', function(req, res) {
 });
 
 app.post('/login', function(req, res) {
-    var config = {
+    let config = {
         method: 'post',
         url: 'https://172.0.1.211:50000/b1s/v1/Login',
         headers: {
@@ -119,40 +122,54 @@ app.listen(port, function() {
 
 
 
+/**
+ * Connects to Service Layer
+ * @param {string} method [GET, POST, PUT, DELETE]
+ * @param {string} url API endpoint
+ * @param {string} data Only for POST, PUT & DELETE -  JSON with fields to be added/modified/deleted
+ * 
+ */
+const ConnectServiceLayer = function(method, url, data) {
+    reqData = data || {};
 
+    let loginConfig = {
+        method: 'post',
+        url: 'https://172.0.1.211:50000/b1s/v1/Login',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
+        },
+        data: datos,
+        timeout: 5000
+    };
 
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Connection", "keep-alive");
+    res.header("Content-Type", "application/json");
+    //POST Login
+    axios(loginConfig)
+        .then(function(response) {
+            let reqConfig = {
+                method: method,
+                url: url,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Cookie': response.headers['set-cookie']
+                },
+                data: reqData,
+                timeout: 5000
+            };
 
-//Connect to Service Layer
-let Connect = function() {
-    return new Promise(function(resolve, reject) {
-        const options = {
-            method: "POST",
-            baseURL: "hanab1",
-            port: 50000,
-            url: '/b1s/v1/Login',
-            data: {
-                UserName: 'manager',
-                Password: 's0p0rt3',
-                CompanyDB: 'CORESA_01_12_2020'
-            }
-        }
+            axios(reqConfig)
+                .then(function(resp) {
+                    res.send(JSON.stringify(resp.data));
+                })
+                .catch(function(err) {
+                    res.send(err);
+                });
 
-        axios.request(options).then((response) => {
-                console.log(`SL Response: is ${response.status} - ${response.statusText}`)
-                if (response.statusCode < 200 || response.statusCode >= 300) {
-                    return reject(
-                        new Error(`${response.statusCode}: ${response.req.getHeader("host")} ${response.req.path}`)
-                    );
-                } else {
-                    resolve({
-                        cookie: response.headers['set-cookie'],
-                        SessionId: response.data.SessionId
-                    })
-                }
-            })
-            .catch((err) => {
-                console.error("Error calling B1 -" + err)
-                reject(new Error(err));
-            })
-    })
+        })
+        .catch(function(error) {
+            res.send(error);
+        });
 }
