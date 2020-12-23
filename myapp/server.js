@@ -72,8 +72,8 @@ app.post('/orders', function(req, res) {
         "DocumentLines": [{
             "ItemCode": "BT-60-14NW",
             "Quantity": "10",
-            //"TaxCode": "T1",
-            //"UnitPrice": "30"
+            "TaxCode": "IVA_10.5",
+            "UnitPrice": "30"
         }]
     }
 
