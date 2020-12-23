@@ -32,100 +32,6 @@ app.listen(port, function() {
 
 
 app.post('/login', function(req, res) {
-    /*
-    let options = {
-        host: 'hanab1',
-        port: 50000,
-        path: '/b1s/v1/Login',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            //'Content-Length': Buffer.byteLength(datos)
-        }
-    };
-    
-    let httpreq = http.request(options, function(response) {
-        response.setEncoding('utf8');
-        response.on('data', function(chunk) {
-            res.json(chunk);
-            //console.log(chunk);
-        });
-        response.on('end', function() {
-            res.send('ok');
-        });
-
-    });
-
-    if(httpreq.write(datos)) {
-        res.send('Logged in! ' + res.data);
-    };
-
-    httpreq.on('error', error => {
-        console.error(error)
-    })
-
-    //httpreq.end();
-    **************************/
-    //res.send(req.body);
-    /*
-    const config = {
-        method: "POST",
-        headers: {
-            "Content-type": "application/json;charset=utf-8"
-        },
-        body: datos
-    };
-
-    axios.post('https://hanab1:50000/b1s/v1/Login', config)
-        .then(res => {
-            console.log(JSON.stringify(res.data));
-            res.send("Logged in!");
-        })
-        .catch(err => {
-            let mensaje = err.statusText || 'Se produjo un error.';
-            console.error('Error: ' + err.status + '-' + mensaje);
-        });
-
-    /*
-    
-    let xhr = new XMLHttpRequest();
-
-    xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState == 4) {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                console.log(JSON.parse(xhr.responseText));
-            } else {
-                let mensaje = xhr.statusText || 'Se produjo un error.';
-                console.error('Error: ' + xhr.status + '-' + mensaje);
-            }
-        }
-    })
-
-    xhr.open('POST', 'https://hanab1:50000/b1s/v1/Login');
-    xhr.setRequestHeader("Content-type", "application/json;charset=utf-8");
-    xhr.send(datos);
-
-    *
-
-    let XHRConfig = {
-        url: 'https://hanab1:50000/b1s/v1/Login',
-        method: 'POST',
-        timeout: 15000,
-        body: datos,
-        json: true
-    }
-
-    Xhr(XHRConfig, function(err, resp, body) {
-        if (resp.statusCode >= 200 && xhr.statusCode < 300) {
-            console.log(JSON.parse(resp.body));
-        } else {
-            let mensaje = resp.statusText || 'Se produjo un error.';
-            console.error('Error: ' + resp.statusCode + '-' + mensaje);
-        }
-    })
-    */
-
-    //Connect();
 
     var config = {
         method: 'post',
@@ -144,7 +50,7 @@ app.post('/login', function(req, res) {
         .then(function(response) {
             cookie = res.getHeader('Cookie');
             res.send(JSON.stringify(response.data));
-            //res.send('Cookie: ' + cookie);
+            res.send('Cookie: ' + cookie);
         })
         .catch(function(error) {
             res.send(error);
@@ -212,7 +118,7 @@ app.get('/clientes', function(req, res) {
         url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners('C00818')",
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
+            'Cookie': cookie
         },
         //data: datos,
         timeout: 5000
