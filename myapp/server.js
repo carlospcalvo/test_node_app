@@ -40,12 +40,9 @@ app.get('/clientes', function(req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Connection", "keep-alive");
     res.header("Content-Type", "application/json");
+    //POST Login
     axios(config)
         .then(function(response) {
-            //response.setHeader("connection", "keep-alive");
-            //res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
-            //res.send(response.getHeader('set-cookie'));
-
             //GET CLIENTES
             let configGet = {
                 method: 'get',
@@ -54,7 +51,6 @@ app.get('/clientes', function(req, res) {
                     'Content-Type': 'application/json',
                     'Cookie': response.headers['set-cookie']
                 },
-                //data: datos,
                 timeout: 5000
             };
 
@@ -73,42 +69,9 @@ app.get('/clientes', function(req, res) {
 
 });
 
-app.get('/logout', function(req, res) {
-    let options = {
-        host: 'hanab1',
-        port: 50000,
-        path: '/b1s/v1/Logout',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            //'Content-Length': Buffer.byteLength(data)
-        }
-    };
-
-    let httpreq = http.request(options, function(response) {
-        response.setEncoding('utf8');
-        response.on('data', function(chunk) {
-            console.log('status: ', response.statusCode);
-            console.log("body: " + JSON.stringify(chunk));
-        });
-        response.on('end', function() {
-            res.send('ok');
-        });
-
-    });
-
-    if (httpreq.write(datos)) {
-        res.send('Logged out!' + res.statusCode);
-    }
-
-    httpreq.end();
-
-    res.send('Logged out!');
-});
-
-
 app.get('/', function(req, res) {
-    //    res.send('Hello World!');
+    res.send(JSON.stringify({ response: "This are not the droids you're looking for." }));
+    /*
     let options = {
         method: 'GET',
         url: 'https://restcountries-v1.p.rapidapi.com/all',
@@ -123,33 +86,32 @@ app.get('/', function(req, res) {
     }).catch(function(error) {
         res.send(error);
     });
+    */
 });
-/*
-app.get('/clientes', function(req, res) {
+
+app.post('/login', function(req, res) {
     var config = {
-        method: 'get',
-        url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners('C00818')",
+        method: 'post',
+        url: 'https://172.0.1.211:50000/b1s/v1/Login',
         headers: {
             'Content-Type': 'application/json',
             'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
         },
-        //data: datos,
+        data: datos,
         timeout: 5000
     };
 
     res.header("Access-Control-Allow-Origin", "*");
-
+    res.header("Connection", "keep-alive");
+    res.header("Content-Type", "application/json");
     axios(config)
         .then(function(response) {
-            res.send(JSON.stringify(response.data));
+            res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
         })
         .catch(function(error) {
             res.send(error);
         });
-
 });
-*/
-
 
 app.listen(port, function() {
     console.log('myapp listening on port ' + port);
