@@ -36,9 +36,9 @@ app.get('/orders', function(req, res) {
 
     for (i = 0; i < values.length; i++) {
         if (i != values.length - 1) {
-            select += element + ',';
+            select += values[i] + ',';
         } else {
-            select += element;
+            select += values[i];
         }
     }
 
