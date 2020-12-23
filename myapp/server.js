@@ -16,6 +16,7 @@ const corsOpts = {
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
+const cookie;
 
 
 app.use(bodyParser.json()); // support json encoded bodies
@@ -135,7 +136,9 @@ app.post('/login', function(req, res) {
     //res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
-            res.send(JSON.stringify(response.data));
+            cookie = res.getHeader('Cookie');
+            //res.send(JSON.stringify(response.data));
+            res.send('Cookie: ' + cookie);
         })
         .catch(function(error) {
             res.send(error);
