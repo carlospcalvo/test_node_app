@@ -1,4 +1,5 @@
 const express = require('express');
+const port = process.env.PORT || 3000;
 const http = require('https');
 const axios = require('axios').default;
 const bodyParser = require('body-parser');
@@ -20,7 +21,7 @@ const corsOpts = {
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors(corsOpts));
-//supuestamente desactiva el certificado ssl
+//desactiva el certificado ssl
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 app.post('/login', function(req, res) {
@@ -208,17 +209,19 @@ app.get('/clientes', function(req, res) {
         timeout: 5000
     };
 
+    res.header("Access-Control-Allow-Origin", "*");
+
     axios(config)
         .then(function(response) {
-            console.log(JSON.stringify(response.data));
+            res.send(JSON.stringify(response.data));
         })
         .catch(function(error) {
-            console.log(error);
+            res.send(error);
         });
 
 });
 
-const port = process.env.PORT || 3000;
+
 
 app.listen(port, function() {
     console.log('myapp listening on port ' + port);
