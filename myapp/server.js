@@ -16,7 +16,7 @@ const corsOpts = {
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
-let cookie;
+const cookie = 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1';
 
 
 app.use(bodyParser.json()); // support json encoded bodies
@@ -38,7 +38,7 @@ app.post('/login', function(req, res) {
         url: 'https://172.0.1.211:50000/b1s/v1/Login',
         headers: {
             'Content-Type': 'application/json',
-            'Cookie': 'B1SESSION=45e246c8-446f-11eb-8000-0ef81b3704dd; ROUTEID=.node1'
+            'Cookie': cookie
         },
         data: datos,
         timeout: 5000
