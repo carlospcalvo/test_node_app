@@ -132,7 +132,7 @@ app.post('/login', function(req, res) {
     };
 
     res.header("Access-Control-Allow-Origin", "*");
-    res.setHeader("connection", "keep-alive");
+    res.setHeader("Connection", "keep-alive");
     //res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
