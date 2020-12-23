@@ -131,7 +131,7 @@ app.post('/login', function(req, res) {
     };
 
     res.header("Access-Control-Allow-Origin", "*");
-    res.send(JSON.stringify(req.headers));
+    //res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
             res.send(JSON.stringify(response.data));
