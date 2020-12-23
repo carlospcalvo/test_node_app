@@ -7,7 +7,7 @@ const XHR = require('xhr');
 const cors = require('cors');
 const app = express();
 let datos = JSON.stringify({
-    "CompanyDB": "CORESA_01_12_2020",
+    "CompanyDB": "KING_SA",
     "UserName": "manager",
     "Password": "s0p0rt3"
 });
@@ -146,7 +146,7 @@ app.post('/login', function(req, res) {
 
             var configGet = {
                 method: 'get',
-                url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners",
+                url: "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode, 'ML')&$orderby=CardCode",
                 headers: {
                     'Content-Type': 'application/json',
                     'Cookie': response.headers['set-cookie']
