@@ -26,7 +26,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 app.get('/clientes', function(req, res) {
 
-    ConnectServiceLayer('GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
+    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
     /*
     let config = {
         method: 'post',
@@ -121,15 +121,15 @@ app.listen(port, function() {
 });
 
 
-
 /**
  * Connects to Service Layer
+ * @param {Response} res 
  * @param {string} method [GET, POST, PUT, DELETE]
  * @param {string} url API endpoint
  * @param {string} data Only for POST, PUT & DELETE -  JSON with fields to be added/modified/deleted
  * 
  */
-const ConnectServiceLayer = function(method, url, data) {
+const ConnectServiceLayer = function(res, method, url, data) {
     reqData = data || {};
 
     let loginConfig = {
