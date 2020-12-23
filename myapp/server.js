@@ -149,7 +149,7 @@ app.post('/login', function(req, res) {
     axios(config)
         .then(function(response) {
             //response.setHeader("connection", "keep-alive");
-            res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
+            res.send(JSON.stringify({ headers: response.headers['set-cookie'] }) + JSON.stringify(response.data));
             //res.send(response.getHeader('set-cookie'));
             //GET CLIENTE
             /*
