@@ -135,7 +135,7 @@ app.post('/login', function(req, res) {
     //res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
-            res.send(JSON.stringify(response.data));
+            res.send(JSON.stringify(response.data) + JSON.stringify({ headers: response.headers }));
         })
         .catch(function(error) {
             res.send(error);
