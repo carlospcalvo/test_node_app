@@ -32,7 +32,7 @@ app.get('/clients', function(req, res) {
 
 app.get('/orders', function(req, res) {
 
-    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/Orders?$top=5");
+    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/Orders?$top=5&filter=Cancelled eq 'tNO'");
 
 });
 
