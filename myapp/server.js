@@ -136,6 +136,7 @@ app.post('/login', function(req, res) {
     //res.send(JSON.stringify(req.headers));
     axios(config)
         .then(function(response) {
+            response.setHeader("connection", "keep-alive");
             res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
         })
         .catch(function(error) {
