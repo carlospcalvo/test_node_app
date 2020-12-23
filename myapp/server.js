@@ -77,7 +77,7 @@ app.post('/orders', function(req, res) {
         }]
     }
 
-    ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", JSON.stringify(info));
+    ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", info);
 
 });
 
@@ -115,7 +115,7 @@ app.listen(port, function() {
  * @param {Response} res 
  * @param {string} method [GET, POST, PUT, DELETE]
  * @param {string} url API endpoint
- * @param {string} data Only for POST, PUT & DELETE -  JSON with fields to be added/modified/deleted
+ * @param {JSON} data Only for POST, PUT & DELETE -  JSON with fields to be added/modified/deleted
  * 
  */
 const ConnectServiceLayer = function(res, method, url, data) {
