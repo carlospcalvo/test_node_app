@@ -10,8 +10,8 @@ const app = express();
 let datos = JSON.stringify({
     "CompanyDB": "CORESA_01_12_2020",
     //"CompanyDB": "KING_SA",
-    "UserName": "manager",
-    "Password": "s0p0rt3"
+    "UserName": "CCALVO",
+    "Password": "123789"
 });
 const corsOpts = {
     origin: '*',
@@ -98,7 +98,7 @@ app.post('/login', function(req, res) {
     res.header("Content-Type", "application/json");
     axios(config)
         .then(function(response) {
-            res.send(JSON.stringify({ headers: response.headers }) + JSON.stringify(response.data));
+            res.send(JSON.stringify({ headers: response.headers, data: response.data }));
         })
         .catch(function(error) {
             res.send(error);
