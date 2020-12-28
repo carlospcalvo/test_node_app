@@ -25,7 +25,8 @@ app.use(cors(corsOpts)); // enables CORS (I guess)
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'; // desactiva el certificado ssl
 
 app.get('/clients', function(req, res) {
-    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,FederalTaxID&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
+    //ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,FederalTaxID&$filter=startswith(CardCode,'ML')&$orderby=CardCode");
+    ConnectServiceLayer(res, 'GET', "https://172.0.1.211:50000/b1s/v1/BusinessPartners?$select=CardCode,CardName,FederalTaxID&$orderby=CardCode");
 });
 
 app.get('/orders', function(req, res) {
