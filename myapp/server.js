@@ -143,7 +143,7 @@ const ConnectServiceLayer = function(res, method, url, data) {
         .then(function(response) {
             let reqConfig = {
                 method: method,
-                url: url.toString(),
+                url: url,
                 headers: {
                     'Content-Type': 'application/json',
                     'Cookie': response.headers['set-cookie']
@@ -154,14 +154,14 @@ const ConnectServiceLayer = function(res, method, url, data) {
 
             axios(reqConfig)
                 .then(function(resp) {
-                    res.send(JSON.stringify({ 'URL': url, "data": JSON.stringify(resp.data) }));
+                    res.send(JSON.stringify(resp.data));
                 })
                 .catch(function(err) {
-                    res.send(JSON.stringify({ 'URL error': url }));
+                    res.send(JSON.stringify(reqConfig));
                 });
 
         })
         .catch(function(error) {
-            res.send("Error en el login" + error);
+            res.send(error);
         });
 }
