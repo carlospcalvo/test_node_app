@@ -143,7 +143,7 @@ const ConnectServiceLayer = function(res, method, url, data) {
         .then(function(response) {
             let reqConfig = {
                 method: method,
-                url: url,
+                url: url.toString(),
                 headers: {
                     'Content-Type': 'application/json',
                     'Cookie': response.headers['set-cookie']
