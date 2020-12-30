@@ -80,8 +80,9 @@ app.post('/orders', function(req, res) {
         }]
     }
 
-    //ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", info);
-    res.send(JSON.stringify(info));
+    ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", info);
+
+    //res.send(JSON.stringify(info));
 });
 
 app.post('/login', function(req, res) {
@@ -111,7 +112,6 @@ app.post('/login', function(req, res) {
 app.listen(port, function() {
     console.log('myapp listening on port ' + port);
 });
-
 
 /**
  * Connects to Service Layer
@@ -157,11 +157,11 @@ const ConnectServiceLayer = function(res, method, url, data) {
                     res.send(JSON.stringify(resp.data));
                 })
                 .catch(function(err) {
-                    res.send(err);
+                    res.send("Error en el POST de la OV" + err);
                 });
 
         })
         .catch(function(error) {
-            res.send(error);
+            res.send("Error en el login" + error);
         });
 }
