@@ -10,8 +10,8 @@ const USER = process.env.SAP_USER.toString();
 const PASS = process.env.SAP_PASS.toString();
 
 let datos = JSON.stringify({
-    "CompanyDB": "MACRO",
-    //"CompanyDB": "KING_SA",
+    //"CompanyDB": "MACRO",
+    "CompanyDB": "KING_SA",
     "UserName": USER,
     "Password": PASS
 });
