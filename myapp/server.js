@@ -10,8 +10,8 @@ const USER = process.env.SAP_USER.toString();
 const PASS = process.env.SAP_PASS.toString();
 
 let datos = JSON.stringify({
-    "CompanyDB": "MACRO",
-    //"CompanyDB": "KING_SA",
+    //"CompanyDB": "MACRO",
+    "CompanyDB": "KING_SA",
     "UserName": USER,
     "Password": PASS
 });
@@ -72,6 +72,7 @@ app.post('/orders', function(req, res) {
     let info = {
         "CardCode": "C00002",
         "DocDueDate": "2020-12-31",
+        "Comments": "TEST SERVICE LAYER",
         "DocumentLines": [{
             "ItemCode": "GBL-003",
             "Quantity": "1",
