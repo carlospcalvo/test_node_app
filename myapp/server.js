@@ -78,8 +78,8 @@ app.post('/orders', function(req, res) {
         }]
     }
 
-    ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", info);
-
+    //ConnectServiceLayer(res, 'POST', "https://172.0.1.211:50000/b1s/v1/Orders", info);
+    res.send(JSON.stringify(info));
 });
 
 app.post('/login', function(req, res) {
