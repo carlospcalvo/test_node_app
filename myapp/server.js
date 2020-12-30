@@ -157,7 +157,7 @@ const ConnectServiceLayer = function(res, method, url, data) {
                     res.send(JSON.stringify(resp.data));
                 })
                 .catch(function(err) {
-                    res.send("Error en el POST de la OV" + err + url);
+                    res.send(JSON.stringify({ 'URL': url }));
                 });
 
         })
