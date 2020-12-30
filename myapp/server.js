@@ -157,7 +157,7 @@ const ConnectServiceLayer = function(res, method, url, data) {
                     res.send(JSON.stringify(resp.data));
                 })
                 .catch(function(err) {
-                    res.send(JSON.stringify(reqConfig));
+                    res.send(err);
                 });
 
         })
