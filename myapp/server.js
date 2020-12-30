@@ -6,12 +6,14 @@ const bodyParser = require('body-parser');
 const XHR = require('xhr');
 const cors = require('cors');
 const app = express();
+const USER = process.env.SAP_USER.toString();
+const PASS = process.env.SAP_PASS.toString();
 
 let datos = JSON.stringify({
     "CompanyDB": "CORESA_01_12_2020",
     //"CompanyDB": "KING_SA",
-    "UserName": "CCALVO",
-    "Password": "123789"
+    "UserName": USER,
+    "Password": PASS
 });
 const corsOpts = {
     origin: '*',
