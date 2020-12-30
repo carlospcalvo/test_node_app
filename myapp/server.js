@@ -68,10 +68,10 @@ app.get('/', function(req, res) {
 app.post('/orders', function(req, res) {
 
     let info = {
-        "CardCode": "C00637",
+        "CardCode": "TEST2",
         "DocDueDate": "2020-12-31",
         "DocumentLines": [{
-            "ItemCode": "BT-60-14NW",
+            "ItemCode": "V00001",
             "Quantity": "10",
             "TaxCode": "IVA_10.5",
             "UnitPrice": "30"
