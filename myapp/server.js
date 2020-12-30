@@ -10,7 +10,7 @@ const USER = process.env.SAP_USER.toString();
 const PASS = process.env.SAP_PASS.toString();
 
 let datos = JSON.stringify({
-    "CompanyDB": "CORESA_01_12_2020",
+    "CompanyDB": "MACRO",
     //"CompanyDB": "KING_SA",
     "UserName": USER,
     "Password": PASS
@@ -149,7 +149,7 @@ const ConnectServiceLayer = function(res, method, url, data) {
                     'Cookie': response.headers['set-cookie']
                 },
                 data: reqData,
-                timeout: 5000
+                //timeout: 5000
             };
 
             axios(reqConfig)
