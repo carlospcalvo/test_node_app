@@ -154,10 +154,10 @@ const ConnectServiceLayer = function(res, method, url, data) {
 
             axios(reqConfig)
                 .then(function(resp) {
-                    res.send(JSON.stringify({ 'URL': url }, { "data": JSON.stringify(resp.data) }));
+                    res.send(JSON.stringify({ 'URL': url, "data": JSON.stringify(resp.data) }));
                 })
                 .catch(function(err) {
-                    res.send(JSON.stringify({ 'URL': url }));
+                    res.send(JSON.stringify({ 'URL error': url }));
                 });
 
         })
