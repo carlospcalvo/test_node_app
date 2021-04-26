@@ -48,7 +48,7 @@ app.get('/orders', function(req, res) {
 
 app.get('/', function(req, res) {
     res.header("Content-Type", "application/json");
-    res.send(JSON.stringify({ "Obi-Wan Kenobi": "This are not the droids you're looking for." }));
+    res.send(JSON.stringify({ "Obi-Wan Kenobi": "This is not the endpoint you're looking for." }));
     /*
     let options = {
         method: 'GET',
